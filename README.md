@@ -24,7 +24,7 @@ There are a few open-source projects that can convert CSV Files to Java Objects.
 Maven:
 ```xml
 <dependency>
-  <groupId>io.github.see-es-vee/see-es-vee</groupId>
+  <groupId>io.github.see-es-vee</groupId>
   <artifactId>see-es-vee</artifactId>
   <version>1.0.0</version>
 </dependency>
