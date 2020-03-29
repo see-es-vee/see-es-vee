@@ -2,7 +2,7 @@
 
 <br />
 <p align="center">
-<img alt="praxxis logo" src="https://raw.githubusercontent.com/see-es-vee/see-es-vee/master/docs/see-es-vee.png">
+<img alt="see-es-vee-logo" src="https://raw.githubusercontent.com/see-es-vee/see-es-vee/master/docs/see-es-vee.png">
 </div>
 
 
