@@ -15,7 +15,7 @@ public final class CSVParser<T> {
     private final HashMap<Class<?>, ArrayList<Handler>> handlers = new HashMap<>();
 
 
-    CSVParser(String delimiter, Class<T> classOfT, HashMap<Class<?>, Handler> additionalHandlers){
+    CSVParser(String delimiter, Class<T> classOfT, HashMap<Class<?>, ArrayList<Handler>> additionalHandlers){
         this.DELIMITER = delimiter;
         this.classOfT = classOfT;
 
@@ -30,7 +30,9 @@ public final class CSVParser<T> {
         addHandler(Integer.class, new IntegerHandler());
 
         if(additionalHandlers != null){
-            additionalHandlers.forEach(this::addHandler);
+            additionalHandlers.forEach((k,v) -> {
+                v.forEach((v2 -> this.addHandler(k,v2)));
+            });
         }
     }
 
