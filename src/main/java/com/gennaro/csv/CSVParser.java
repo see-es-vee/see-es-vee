@@ -1,7 +1,6 @@
 package com.gennaro.csv;
 
-import com.gennaro.csv.handlers.Handler;
-import com.gennaro.csv.handlers.StringHandler;
+import com.gennaro.csv.handlers.*;
 
 import java.io.*;
 import java.lang.reflect.Field;
@@ -13,7 +12,7 @@ public final class CSVParser<T> {
 
     private final String DELIMITER;
     private final Class classOfT;
-    private HashMap<Class<?>, ArrayList<Handler>> handlers = new HashMap<>();
+    private final HashMap<Class<?>, ArrayList<Handler>> handlers = new HashMap<>();
 
 
     CSVParser(String delimiter, Class classOfT, HashMap<Class, Handler> additionalHandlers){
@@ -21,6 +20,14 @@ public final class CSVParser<T> {
         this.classOfT = classOfT;
 
         addHandler(String.class, new StringHandler());
+        addHandler(Character.class, new CharacterHandler());
+        addHandler(Boolean.class, new BooleanHandler());
+        addHandler(Byte.class, new ByteHandler());
+        addHandler(Double.class, new DoubleHandler());
+        addHandler(Float.class, new FloatHandler());
+        addHandler(Long.class, new LongHandler());
+        addHandler(Short.class, new ShortHandler());
+        addHandler(Integer.class, new IntegerHandler());
 
         if(additionalHandlers != null){
             additionalHandlers.forEach(this::addHandler);
