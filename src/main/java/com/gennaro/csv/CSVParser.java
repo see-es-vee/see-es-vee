@@ -81,11 +81,9 @@ public final class CSVParser<T> {
 
             T object = (T) classOfT.getDeclaredConstructor().newInstance(new Object[]{});
 
-            if(parsedLine.size() == header.size()){
-                for(Integer i : header.keySet()){
-                    Field field = header.get(i);
-                    handleValue(field, parsedLine.get(i), object);
-                }
+            for(Integer i : header.keySet()){
+                Field field = header.get(i);
+                handleValue(field, parsedLine.get(i), object);
             }
 
             parsedLine = parseRow(csv);
@@ -162,7 +160,7 @@ public final class CSVParser<T> {
 
         handlers.get(field.getType()).forEach(v -> {
             try {
-                v.handle(value, object, field);
+                v.handleRead(value, object, field);
             } catch (IllegalAccessException e) {
 
             }
