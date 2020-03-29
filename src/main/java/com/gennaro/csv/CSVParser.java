@@ -11,11 +11,11 @@ import java.util.HashMap;
 public final class CSVParser<T> {
 
     private final String DELIMITER;
-    private final Class classOfT;
+    private final Class<T> classOfT;
     private final HashMap<Class<?>, ArrayList<Handler>> handlers = new HashMap<>();
 
 
-    CSVParser(String delimiter, Class classOfT, HashMap<Class, Handler> additionalHandlers){
+    CSVParser(String delimiter, Class<T> classOfT, HashMap<Class<?>, Handler> additionalHandlers){
         this.DELIMITER = delimiter;
         this.classOfT = classOfT;
 
