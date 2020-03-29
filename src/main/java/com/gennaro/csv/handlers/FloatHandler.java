@@ -2,10 +2,9 @@ package com.gennaro.csv.handlers;
 
 import java.lang.reflect.Field;
 
-public class StringHandler extends Handler{
-
+public class FloatHandler extends Handler {
     @Override
     public void handle(String value, Object object, Field field) throws IllegalAccessException {
-        this.setSafely(value.length() < 1 ? null : value, object, field);
+        this.setSafely(value.length() < 1 ? null : Float.parseFloat(value), object, field);
     }
 }
