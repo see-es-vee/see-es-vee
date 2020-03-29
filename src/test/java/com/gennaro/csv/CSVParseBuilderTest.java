@@ -36,10 +36,21 @@ public class CSVParseBuilderTest {
         Field handlers = t.getClass().getDeclaredField("handlers");
         handlers.setAccessible(true);
         HashMap<Class<?>, ArrayList<Handler>> hands = (HashMap<Class<?>, ArrayList<Handler>>) handlers.get(t);
-        boolean found = false;
         Assertions.assertTrue(hands.containsKey(TestClass.class));
         Assertions.assertNull(hands.get(TestClass.class).get(0));
         handlers.setAccessible(false);
+        t.parse(new File("dank.csv"));
+    }
+    @Test
+    @SuppressWarnings("unchecked")
+    void builderShouldSetDelimiter() throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, IOException, NoSuchFieldException {
+        CSVParser<TestClass> t = new CSVParseBuilder<TestClass>()
+                .setClass(TestClass.class)
+                .setDelimiter(":")
+                .create();
+        Field DELIMITER = t.getClass().getDeclaredField("DELIMITER");
+        DELIMITER.setAccessible(true);
+        Assertions.assertEquals(":", DELIMITER.get(t));
         t.parse(new File("dank.csv"));
     }
 }
