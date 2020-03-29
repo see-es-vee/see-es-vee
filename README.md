@@ -30,7 +30,7 @@ Maven:
 </dependency>
 ```
 
-[see-es-vee jar downloads](https://maven-badges.herokuapp.com/maven-central/io.github.see-es-vee/see-es-vee) are available from Maven Central.
+[see-es-vee jar downloads](https://maven-badges.herokuapp.com/maven-central/io.github.see-es-vee) are available from Maven Central.
 
 
 ### Documentation
