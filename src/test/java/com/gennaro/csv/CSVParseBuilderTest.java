@@ -9,6 +9,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 /**
  * Created by ianot on 3/29/2020. None of this software may be reproduced without
  * the express written permission of PlaygroundMC.
@@ -32,6 +34,7 @@ public class CSVParseBuilderTest {
         CSVParser<TestClass> t = new CSVParseBuilder<TestClass>()
                 .setClass(TestClass.class)
                 .addHandler(TestClass.class, null)
+                .addHandler(TestClass.class, null)
                 .create();
         Field handlers = t.getClass().getDeclaredField("handlers");
         handlers.setAccessible(true);
@@ -42,7 +45,6 @@ public class CSVParseBuilderTest {
         t.parse(new File("dank.csv"));
     }
     @Test
-    @SuppressWarnings("unchecked")
     void builderShouldSetDelimiter() throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, IOException, NoSuchFieldException {
         CSVParser<TestClass> t = new CSVParseBuilder<TestClass>()
                 .setClass(TestClass.class)
@@ -52,5 +54,12 @@ public class CSVParseBuilderTest {
         DELIMITER.setAccessible(true);
         Assertions.assertEquals(":", DELIMITER.get(t));
         t.parse(new File("dank.csv"));
+    }
+    @Test
+    void builderShouldNotAllowNullClass() throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, IOException, NoSuchFieldException {
+        CSVParseBuilder<TestClass> t = new CSVParseBuilder<TestClass>()
+                .setClass(null)
+                .setDelimiter(":");
+        Exception exception = assertThrows(NullPointerException.class, t::create);
     }
 }
