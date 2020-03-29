@@ -17,12 +17,12 @@ public class CSVParserTest {
     @Test
     public void parseRowTest() throws IOException {
         CSVParser<TestClass> parser = new CSVParser<>(",", TestClass.class, null);
-        String test = "test,\"\",\",hello\nworld\"";
+        String test = "test,\"\",\",hello\nworld\",\",,\",,hi";
         Reader inputString = new StringReader(test);
         BufferedReader reader = new BufferedReader(inputString);
         ArrayList<String> parsed = parser.parseRow(reader);
 
-        assertArrayEquals(new String[]{"test", "\"\"", "\",hello\nworld\""}, parsed.toArray(new String[0]));
+        assertArrayEquals(new String[]{"test", "\"\"", "\",hello\nworld\"", "\",,\"", "", "hi"}, parsed.toArray(new String[0]));
     }
 
 
@@ -30,13 +30,13 @@ public class CSVParserTest {
     void parseHeaderTest() throws IOException {
 
         CSVParser<TestClass> parser = new CSVParser<>(",", TestClass.class, null);
-        String test = "9dad,*mom,69ian,\"gennaro\",ian and gennaro";
+        String test = "9dad,*mom,69ian,\"gennaro\",ian and gennaro,ignorethis";
         Reader inputString = new StringReader(test);
         BufferedReader reader = new BufferedReader(inputString);
 
         HashMap<Integer, Field> testHeader = parser.parseHeader(reader);
 
-        assertEquals(TestClass.class.getFields().length, testHeader.keySet().size());
+        assertEquals(5, testHeader.keySet().size());
     }
 
 

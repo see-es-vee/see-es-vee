@@ -105,8 +105,8 @@ public final class CSVParser<T> {
                     string.append(DELIMITER);
                 }
 
-                if(str.length() != 0) {
-                    if (str.charAt(0) == '\"') {
+                if(str.length() != 0 || quoteOpen) {
+                    if (!quoteOpen && str.charAt(0) == '\"') {
                         if (str.length() == 1 || str.charAt(1) != '\"') {
                             quoteOpen = true;
                             addedThisCycle = true;
@@ -115,7 +115,7 @@ public final class CSVParser<T> {
 
                     string.append(str);
 
-                    if (!(addedThisCycle && str.length() <= 1) && str.charAt(str.length() - 1) == '\"') {
+                    if (!(addedThisCycle && str.length() <= 1) && str.length() > 0 && str.charAt(str.length() - 1) == '\"') {
                         if (str.length() == 1 || str.charAt(str.length() - 2) != '\"') {
                             quoteOpen = false;
                         }
@@ -127,9 +127,7 @@ public final class CSVParser<T> {
                     }
                 }
                 else{
-                    if(!quoteOpen){
-                        stringsArray.add("");
-                    }
+                    stringsArray.add("");
                 }
                 addedThisCycle = false;
             }
@@ -141,7 +139,7 @@ public final class CSVParser<T> {
         return stringsArray;
     }
 
-    void addHandler(Class clazz, Handler handler){
+    void addHandler(Class<?> clazz, Handler handler){
 
         if(!handlers.containsKey(clazz)){
             handlers.put(clazz, new ArrayList<>());
