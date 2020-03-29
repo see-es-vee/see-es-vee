@@ -34,7 +34,7 @@ Maven:
 
 
 ### Documentation
-  * [API Javadoc](https://www.javadoc.io/doc/io.github.see-es-vee/see-es-vee): Documentation for the current release
+  * [API Javadoc](https://www.javadoc.io/doc/io.github.see-es-vee): Documentation for the current release
 
 
 ### Coverage 
