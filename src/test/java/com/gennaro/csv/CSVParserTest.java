@@ -47,7 +47,7 @@ public class CSVParserTest {
         ArrayList<TestClass> testParse = parser.parse(new File("dank.csv"));
 
 
-        assertEquals(1, testParse.size());
+        assertEquals(2, testParse.size());
 
     }
 
