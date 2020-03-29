@@ -105,7 +105,7 @@ public final class CSVParser<T> {
         do{
             String line = file.readLine();
             if(line == null) break;
-            String[] splitLine = line.split(DELIMITER);
+            String[] splitLine = line.split(DELIMITER, -1);
 
             for(int i = 0; i < splitLine.length; i++){
                 String str = splitLine[i];
