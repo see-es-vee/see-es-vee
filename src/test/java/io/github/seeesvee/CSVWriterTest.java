@@ -2,10 +2,7 @@ package io.github.seeesvee;
 
 import org.junit.jupiter.api.Test;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.security.DigestInputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -51,24 +48,24 @@ public class CSVWriterTest {
                 .create();
 
 
-//        File file = new File("./writeFileTestOutput.csv");
-//
-//        System.out.println(file);
-//        System.out.println(testArray);
-//
-//        try{
-//            writer.write(file, testArray);
-//        }
-//        catch(NullPointerException e ){
-//            e.printStackTrace();
-//        }
-//
-//
-//        System.out.println("\n\n\n");
-//
-//        ls();
-//
-//        System.out.println("\n\n\n");
+        File file = new File("./writeFileTestOutput.csv");
+
+        System.out.println(file);
+        System.out.println(testArray);
+
+        try{
+            writer.write(file, testArray);
+        }
+        catch(NullPointerException e ){
+            e.printStackTrace();
+        }
+
+
+        System.out.println("\n\n\n");
+
+        ls();
+
+        System.out.println("\n\n\n");
 
         MessageDigest md = MessageDigest.getInstance("SHA-256");
         String hex = checksum("writeFileTestOutput.csv", md);
