@@ -49,7 +49,10 @@ public class CSVWriterTest {
                 .setClass(TestClass.class)
                 .create();
 
-        writer.write(new File("writeFileTestOutput.csv"), testArray);
+
+        File file = new File("./writeFileTestOutput.csv");
+
+        writer.write(file, testArray);
 
         System.out.println("\n\n\n");
 
