@@ -13,11 +13,8 @@ import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-/**
- * Created by ianot on 3/29/2020. None of this software may be reproduced without
- * the express written permission of PlaygroundMC.
- */
 public class CSVParseBuilderTest {
+
     @Test
     void builderShouldSetClass() throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, IOException, NoSuchFieldException {
         CSVParser<TestClass> t = new CSVParseBuilder<TestClass>()
@@ -46,8 +43,10 @@ public class CSVParseBuilderTest {
         handlers.setAccessible(false);
         t.parse(new File("dank.csv"));
     }
+
     @Test
     void builderShouldSetDelimiter() throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, IOException, NoSuchFieldException {
+
         CSVParser<TestClass> t = new CSVParseBuilder<TestClass>()
                 .setClass(TestClass.class)
                 .setDelimiter(":")
@@ -56,12 +55,17 @@ public class CSVParseBuilderTest {
         DELIMITER.setAccessible(true);
         Assertions.assertEquals(":", DELIMITER.get(t));
         t.parse(new File("dank.csv"));
+
     }
+
     @Test
     void builderShouldNotAllowNullClass() throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, IOException, NoSuchFieldException {
+
         CSVParseBuilder<TestClass> t = new CSVParseBuilder<TestClass>()
                 .setClass(null)
                 .setDelimiter(":");
         Exception exception = assertThrows(NullPointerException.class, t::create);
+
     }
+
 }

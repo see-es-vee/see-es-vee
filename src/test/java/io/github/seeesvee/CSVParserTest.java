@@ -13,9 +13,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CSVParserTest {
 
-
     @Test
     public void parseRowTest() throws IOException {
+
         CSVParser<TestClass> parser = new CSVParser<>(",", TestClass.class, null);
         String test = "test,\"\",\",hello\nworld\",\",,\",,hi";
         Reader inputString = new StringReader(test);
@@ -24,7 +24,6 @@ public class CSVParserTest {
 
         assertArrayEquals(new String[]{"test", "\"\"", "\",hello\nworld\"", "\",,\"", "", "hi"}, parsed.toArray(new String[0]));
     }
-
 
     @Test
     void parseHeaderTest() throws IOException {
@@ -39,13 +38,11 @@ public class CSVParserTest {
         assertEquals(5, testHeader.keySet().size());
     }
 
-
     @Test
     void parseCSVTest() throws IOException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException {
 
         CSVParser<TestClass> parser = new CSVParser<>(",", TestClass.class, null);
         ArrayList<TestClass> testParse = parser.parse(new File("dank.csv"));
-
 
         assertEquals(2, testParse.size());
 

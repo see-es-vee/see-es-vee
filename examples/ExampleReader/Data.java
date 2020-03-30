@@ -1,5 +1,3 @@
-package com.gennaro.csv;
-
 public class Data {
 
         private String PO = null;
