@@ -11,7 +11,15 @@ public class StringHandler extends Handler{
 
     @Override
     public String handleWrite(Object object, Field field) throws IllegalAccessException {
-        return (String) getSafely(object, field);
+
+        Object obj = getSafely(object, field);
+        if(obj == null){
+            return "";
+        }
+        else{
+            return (String) obj;
+        }
+
     }
 
 }
