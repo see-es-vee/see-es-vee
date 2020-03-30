@@ -2,7 +2,9 @@ package io.github.seeesvee;
 
 import org.junit.jupiter.api.Test;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.security.DigestInputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -48,7 +50,6 @@ public class CSVWriterTest {
 
         }
 
-
     private static String checksum(String filepath, MessageDigest md) throws IOException {
 
         // file hashing with DigestInputStream
@@ -63,22 +64,6 @@ public class CSVWriterTest {
             result.append(String.format("%02x", b));
         }
         return result.toString();
-
-    }
-
-    private static void ls(){
-        String s;
-        Process p;
-        try {
-            p = Runtime.getRuntime().exec("ls -aF");
-            BufferedReader br = new BufferedReader(
-                    new InputStreamReader(p.getInputStream()));
-            while ((s = br.readLine()) != null)
-                System.out.println("line: " + s);
-            p.waitFor();
-            System.out.println ("exit: " + p.exitValue());
-            p.destroy();
-        } catch (Exception e) {}
 
     }
 
