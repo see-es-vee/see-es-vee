@@ -20,7 +20,7 @@ public class CSVParseBuilderTest {
         CSVParser<TestClass> t = new CSVParseBuilder<TestClass>()
                 .setClass(TestClass.class)
                 .create();
-        Field classOfT = t.getClass().getDeclaredField("classOfT");
+        Field classOfT = t.getClass().getDeclaredField("clazz");
         classOfT.setAccessible(true);
         Assertions.assertEquals(TestClass.class, classOfT.get(t));
         classOfT.setAccessible(false);

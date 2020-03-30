@@ -14,13 +14,13 @@ import java.util.HashMap;
 public final class CSVParser<T> {
 
     private final String DELIMITER;
-    private final Class<T> classOfT;
+    private final Class<T> clazz;
     private final HashMap<Class<?>, ArrayList<Handler>> handlers = new HashMap<>();
 
 
     CSVParser(String delimiter, Class<T> classOfT, HashMap<Class<?>, ArrayList<Handler>> additionalHandlers){
         this.DELIMITER = delimiter;
-        this.classOfT = classOfT;
+        this.clazz = classOfT;
 
         addHandler(String.class, new StringHandler());
         addHandler(Character.class, new CharacterHandler());
@@ -63,7 +63,7 @@ public final class CSVParser<T> {
                 headerStr = headerStr.replaceAll("[^a-zA-Z0-9_]", "");
                 headerStr = headerStr.replaceFirst("^[0-9]+", "");
 
-                Field field = classOfT.getDeclaredField(headerStr);
+                Field field = clazz.getDeclaredField(headerStr);
                 header.put(i, field);
 
             } catch(NoSuchFieldException e) {
@@ -82,7 +82,7 @@ public final class CSVParser<T> {
 
         while(parsedLine.size() != 0){
 
-            T object = (T) classOfT.getDeclaredConstructor().newInstance(new Object[]{});
+            T object = (T) clazz.getDeclaredConstructor().newInstance(new Object[]{});
 
             for(Integer i : header.keySet()){
                 Field field = header.get(i);

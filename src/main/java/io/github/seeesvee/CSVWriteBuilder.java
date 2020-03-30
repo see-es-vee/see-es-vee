@@ -16,6 +16,7 @@ public final class CSVWriteBuilder<T> {
     public CSVWriter<T> create(){
 
         if(this.handlers.size() == 0) handlers = null;
+        if(this.clazz == null) throw new NullPointerException("Class must be set");
         return new CSVWriter<T>(delimiter, handlers, clazz);
     }
 
