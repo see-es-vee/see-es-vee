@@ -55,7 +55,6 @@ public class CSVWriter<T> {
             for(int i = 0; i < fields.length; i++){
                 try {
                     fields[i].setAccessible(true);
-                    //csvWriter.append("\"" + fields[i].get(data).toString() + "\"");
 
                     Handler handle = handlers.get(fields[i].getType()).get(0);
                     String fieldVal = handle.handleWrite(data, fields[i]);
