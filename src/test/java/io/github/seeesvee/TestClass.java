@@ -6,7 +6,7 @@ public class TestClass{
     public String mom;
     public String ian;
     public String gennaro;
-    private String ian_and_gennaro = "testlol";
+    private String ian_and_gennaro;
     public Byte _byte;
     public Character _char;
     public Long _long;

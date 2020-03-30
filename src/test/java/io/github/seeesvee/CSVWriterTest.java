@@ -2,9 +2,10 @@ package io.github.seeesvee;
 
 import org.junit.jupiter.api.Test;
 
-import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.security.DigestInputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -31,16 +32,16 @@ public class CSVWriterTest {
         testObject._float = 234.5f;
         testObject._int = 1337;
 
-        System.out.println("\n\n\nDelete writeFileTestOutput.csv\n\n\n");
-
-        ls();
-
-        Files.deleteIfExists(Paths.get("writeFileTestOutput.csv"));
-
-        System.out.println("\n\n\nShould be gone\n\n\n");
-
-
-        ls();
+//        System.out.println("\n\n\nDelete writeFileTestOutput.csv\n\n\n");
+//
+//        ls();
+//
+//        Files.deleteIfExists(Paths.get("writeFileTestOutput.csv"));
+//
+//        System.out.println("\n\n\nShould be gone\n\n\n");
+//
+//
+//        ls();
 
         ArrayList<TestClass> testArray = new ArrayList<>();
         testArray.add(testObject);
@@ -50,20 +51,24 @@ public class CSVWriterTest {
                 .create();
 
 
-        File file = new File("./writeFileTestOutput.csv");
-
-        try{
-            writer.write(file, testArray);
-        }
-        catch(NullPointerException e ){
-            e.printStackTrace();
-        }
-
-        System.out.println("\n\n\n");
-
-        ls();
-
-        System.out.println("\n\n\n");
+//        File file = new File("./writeFileTestOutput.csv");
+//
+//        System.out.println(file);
+//        System.out.println(testArray);
+//
+//        try{
+//            writer.write(file, testArray);
+//        }
+//        catch(NullPointerException e ){
+//            e.printStackTrace();
+//        }
+//
+//
+//        System.out.println("\n\n\n");
+//
+//        ls();
+//
+//        System.out.println("\n\n\n");
 
         MessageDigest md = MessageDigest.getInstance("SHA-256");
         String hex = checksum("writeFileTestOutput.csv", md);
