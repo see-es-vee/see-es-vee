@@ -1,4 +1,4 @@
-package com.gennaro.csv.handlers;
+package io.github.seeesvee.handlers;
 
 import java.lang.reflect.Field;
 

@@ -1,4 +1,4 @@
-package com.gennaro.csv;
+package io.github.seeesvee;
 
 public class TestClass{
 

@@ -1,17 +1,17 @@
-package com.gennaro.csv.handlers;
+package io.github.seeesvee.handlers;
 
 import java.lang.reflect.Field;
 
-public class IntegerHandler extends Handler {
+public class FloatHandler extends Handler {
 
     @Override
     public void handleRead(String value, Object object, Field field) throws IllegalAccessException {
-        this.setSafely(value.length() < 1 ? null : Integer.parseInt(value), object, field);
+        this.setSafely(value.length() < 1 ? null : Float.parseFloat(value), object, field);
     }
 
     @Override
     public String handleWrite(Object object, Field field) throws IllegalAccessException {
-        return Integer.toString((Integer) getSafely(object, field));
+        return Float.toString((Float) getSafely(object, field));
     }
 
 }

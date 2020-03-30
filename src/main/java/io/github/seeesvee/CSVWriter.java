@@ -1,5 +1,6 @@
-package com.gennaro.csv;
-import com.gennaro.csv.handlers.*;
+package io.github.seeesvee;
+
+import io.github.seeesvee.handlers.*;
 
 import java.io.File;
 import java.io.FileWriter;

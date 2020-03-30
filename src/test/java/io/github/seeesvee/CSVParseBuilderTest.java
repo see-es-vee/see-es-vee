@@ -1,9 +1,11 @@
-package com.gennaro.csv;
+package io.github.seeesvee;
 
-import com.gennaro.csv.handlers.Handler;
+import io.github.seeesvee.handlers.Handler;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import java.io.*;
+
+import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
