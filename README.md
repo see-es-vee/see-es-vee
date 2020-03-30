@@ -17,7 +17,6 @@ There are a few open-source projects that can convert CSV Files to Java Objects.
   * Allow pre-existing unmodifiable objects to be converted to and from a CSV format
   * Extensive support of Java Generics
   * Allow custom representations for objects
-  * Support arbitrarily complex objects (with deep inheritance hierarchies and extensive use of generic types)
 
 ### Download (NOTE: Downloads from Maven are currently unavailable and are in the process of being approved)
 
