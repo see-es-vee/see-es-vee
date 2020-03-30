@@ -52,7 +52,12 @@ public class CSVWriterTest {
 
         File file = new File("./writeFileTestOutput.csv");
 
-        writer.write(file, testArray);
+        try{
+            writer.write(file, testArray);
+        }
+        catch(NullPointerException e ){
+            e.printStackTrace();
+        }
 
         System.out.println("\n\n\n");
 
