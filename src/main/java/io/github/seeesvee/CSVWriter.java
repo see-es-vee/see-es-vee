@@ -7,6 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class CSVWriter<T> {
@@ -54,6 +55,7 @@ public class CSVWriter<T> {
 
         for(T data : arrayList){
 
+            System.out.println("Size: " + fields.length + "\nArray: " + Arrays.toString(fields));
             for(int i = 0; i < fields.length; i++){
                 System.out.println("START LOOP: " + i);
                 try {
