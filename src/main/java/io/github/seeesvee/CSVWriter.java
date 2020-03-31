@@ -39,11 +39,13 @@ public class CSVWriter<T> {
     public void write(File file, ArrayList<T> arrayList) throws IOException {
 
         FileWriter csvWriter = new FileWriter(file);
+        System.out.println("created new file writer - Successful");
         Field[] fields = clazz.getDeclaredFields();
 
         for(int i = 0; i < fields.length; i++){
 
             csvWriter.append(fields[i].getName());
+            System.out.println("fields[i].getName() " + fields[i].getName());
             if(i < fields.length-1){
                 csvWriter.append(DELIMITER);
             }
@@ -59,6 +61,7 @@ public class CSVWriter<T> {
                     Handler handle = handlers.get(fields[i].getType()).get(0);
                     String fieldVal = handle.handleWrite(data, fields[i]);
 
+                    System.out.println("Appending val: " + fieldVal);
                     csvWriter.append("\"").append(fieldVal).append("\"");
 
                     if(i < fields.length-1){
