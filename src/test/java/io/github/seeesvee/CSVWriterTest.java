@@ -11,6 +11,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class CSVWriterTest {
 
@@ -39,14 +40,16 @@ public class CSVWriterTest {
                 .create();
 
 
-            writer.write(new File("./writeFileTestOutput.csv"), testArray);
+        assertNotNull(writer);
+
+        writer.write(new File("./writeFileTestOutput.csv"), testArray);
 
 
-            MessageDigest md = MessageDigest.getInstance("SHA-256");
-            String hex = checksum("writeFileTestOutput.csv", md);
+        MessageDigest md = MessageDigest.getInstance("SHA-256");
+        String hex = checksum("writeFileTestOutput.csv", md);
 
 
-            assertEquals("3ea2f19bbdfbd73b29e55df257bbfa838563ff53fb1d4e09f5211520ad25505a", hex);
+        assertEquals("3ea2f19bbdfbd73b29e55df257bbfa838563ff53fb1d4e09f5211520ad25505a", hex);
 
         }
 
