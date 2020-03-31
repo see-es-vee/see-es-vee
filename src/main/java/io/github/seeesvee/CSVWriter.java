@@ -64,21 +64,24 @@ public class CSVWriter<T> {
                     System.out.println("Trying to set field accessible SUCCESS");
 
                     System.out.println("GETTING HANDLER: " + fields[i].getType().getName());
-                    Handler handle = handlers.get(fields[i].getType()).get(0);
-                    System.out.println("GETTING HANDLER SUCCESS");
 
-                    System.out.println("GETTING FIELD VALUE");
-                    String fieldVal = handle.handleWrite(data, fields[i]);
-                    System.out.println("GETTING FIELD VALUE SUCCESS");
+                    if(handlers.containsKey(fields[i].getType())) {
+                        Handler handle = handlers.get(fields[i].getType()).get(0);
+                        System.out.println("GETTING HANDLER SUCCESS");
 
-                    System.out.println("Appending val: " + fieldVal);
-                    csvWriter.append("\"").append(fieldVal).append("\"");
+                        System.out.println("GETTING FIELD VALUE");
+                        String fieldVal = handle.handleWrite(data, fields[i]);
+                        System.out.println("GETTING FIELD VALUE SUCCESS");
 
-                    System.out.println("if " + i + " < " + (fields.length-1));
-                    if(i < fields.length-1){
-                        System.out.println("APPENDING DELIMITER");
-                        csvWriter.append(DELIMITER);
-                        System.out.println("APPENDING SUCCESS");
+                        System.out.println("Appending val: " + fieldVal);
+                        csvWriter.append("\"").append(fieldVal).append("\"");
+
+                        System.out.println("if " + i + " < " + (fields.length - 1));
+                        if (i < fields.length - 1) {
+                            System.out.println("APPENDING DELIMITER");
+                            csvWriter.append(DELIMITER);
+                            System.out.println("APPENDING SUCCESS");
+                        }
                     }
                 } catch (IllegalAccessException ignored) {
                 }
