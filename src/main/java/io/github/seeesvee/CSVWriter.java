@@ -61,7 +61,7 @@ public class CSVWriter<T> {
                     fields[i].setAccessible(true);
                     System.out.println("Trying to set field accessible SUCCESS");
 
-                    System.out.println("GETTING HANDLER");
+                    System.out.println("GETTING HANDLER: " + fields[i].getType().getName());
                     Handler handle = handlers.get(fields[i].getType()).get(0);
                     System.out.println("GETTING HANDLER SUCCESS");
 
