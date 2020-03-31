@@ -72,8 +72,13 @@ public class CSVWriter<T> {
             }
             csvWriter.append("\n");
         }
+        System.out.println("Attempting to flush");
         csvWriter.flush();
+        System.out.println("Flush success");
+        System.out.println("Attempting to close.");
         csvWriter.close();
+        System.out.println("close success..");
+
 
     }
 
