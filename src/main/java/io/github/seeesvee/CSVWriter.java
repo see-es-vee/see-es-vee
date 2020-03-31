@@ -55,11 +55,19 @@ public class CSVWriter<T> {
         for(T data : arrayList){
 
             for(int i = 0; i < fields.length; i++){
+                System.out.println("START LOOP: " + i);
                 try {
+                    System.out.println("Trying to set field accessible");
                     fields[i].setAccessible(true);
+                    System.out.println("Trying to set field accessible SUCCESS");
 
+                    System.out.println("GETTING HANDLER");
                     Handler handle = handlers.get(fields[i].getType()).get(0);
+                    System.out.println("GETTING HANDLER SUCCESS");
+
+                    System.out.println("GETTING FIELD VALUE");
                     String fieldVal = handle.handleWrite(data, fields[i]);
+                    System.out.println("GETTING FIELD VALUE SUCCESS");
 
                     System.out.println("Appending val: " + fieldVal);
                     csvWriter.append("\"").append(fieldVal).append("\"");
@@ -72,7 +80,7 @@ public class CSVWriter<T> {
                     }
                 } catch (IllegalAccessException ignored) {
                 }
-                System.out.println("NEXT LOOP");
+                System.out.println("NEXT LOOP: " + i);
             }
             System.out.println("APENDING \"n");
             csvWriter.append("\n");
