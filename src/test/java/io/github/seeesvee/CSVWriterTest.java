@@ -11,12 +11,11 @@ import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-public class CSVWriterTest {
+class CSVWriterTest {
 
     @Test
-    public void writeFileTest() throws IOException, NoSuchAlgorithmException {
+    void writeFileTest() throws IOException, NoSuchAlgorithmException {
 
         TestClass testObject = new TestClass();
         testObject.dad = "dad";
@@ -38,14 +37,7 @@ public class CSVWriterTest {
         CSVWriter<TestClass> writer = new CSVWriteBuilder<TestClass>()
                 .setClass(TestClass.class)
                 .create();
-
-        File file = new File("./writeFileTestOutput.csv");
-
-        assertNotNull(file);
-        assertNotNull(testArray);
-        assertNotNull(writer);
-
-        writer.write(file, testArray);
+        writer.write(new File("./writeFileTestOutput.csv"), testArray);
 
 
         MessageDigest md = MessageDigest.getInstance("SHA-256");
@@ -54,9 +46,9 @@ public class CSVWriterTest {
 
         assertEquals("3ea2f19bbdfbd73b29e55df257bbfa838563ff53fb1d4e09f5211520ad25505a", hex);
 
-        }
+    }
 
-    private static String checksum(String filepath, MessageDigest md) throws IOException {
+    static String checksum(String filepath, MessageDigest md) throws IOException {
 
         // file hashing with DigestInputStream
         try (DigestInputStream dis = new DigestInputStream(new FileInputStream(filepath), md)) {
