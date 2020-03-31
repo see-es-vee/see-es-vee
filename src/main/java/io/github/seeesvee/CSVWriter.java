@@ -39,7 +39,6 @@ public class CSVWriter<T> {
     public void write(File file, ArrayList<T> arrayList) throws IOException {
 
         FileWriter csvWriter = new FileWriter(file);
-        System.out.println("created new file writer - Successful");
         Field[] fields = clazz.getDeclaredFields();
         ArrayList<Field> validFields = new ArrayList<>();
 
@@ -61,46 +60,26 @@ public class CSVWriter<T> {
         for(T data : arrayList){
 
             for(int i = 0; i < validFields.size(); i++){
-                System.out.println("START LOOP: " + i);
                 try {
-                    System.out.println("Trying to set field accessible");
                     validFields.get(i).setAccessible(true);
-                    System.out.println("Trying to set field accessible SUCCESS");
-
-                    System.out.println("GETTING HANDLER: " + fields[i].getType().getName());
 
                     Handler handle = handlers.get(validFields.get(i).getType()).get(0);
-                    System.out.println("GETTING HANDLER SUCCESS");
 
-                    System.out.println("GETTING FIELD VALUE");
                     String fieldVal = handle.handleWrite(data, validFields.get(i));
-                    System.out.println("GETTING FIELD VALUE SUCCESS");
 
-                    System.out.println("Appending val: " + fieldVal);
                     csvWriter.append("\"").append(fieldVal).append("\"");
 
-                    System.out.println("if " + i + " < " + (fields.length - 1));
                     if (i < validFields.size() - 1) {
-                        System.out.println("APPENDING DELIMITER");
                         csvWriter.append(DELIMITER);
-                        System.out.println("APPENDING SUCCESS");
                     }
 
-                } catch (IllegalAccessException ignored) {
-                }
-                System.out.println("NEXT LOOP: " + i);
+                } catch (IllegalAccessException ignored) { }
             }
-            System.out.println("APENDING \"n");
             csvWriter.append("\n");
-            System.out.println("APENDING \"n sccuess");
         }
-        System.out.println("Attempting to flush");
-        csvWriter.flush();
-        System.out.println("Flush success");
-        System.out.println("Attempting to close.");
-        csvWriter.close();
-        System.out.println("close success..");
 
+        csvWriter.flush();
+        csvWriter.close();
 
     }
 
