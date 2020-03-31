@@ -7,7 +7,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 
 public class CSVWriter<T> {
@@ -42,51 +41,51 @@ public class CSVWriter<T> {
         FileWriter csvWriter = new FileWriter(file);
         System.out.println("created new file writer - Successful");
         Field[] fields = clazz.getDeclaredFields();
+        ArrayList<Field> validFields = new ArrayList<>();
 
-        for(int i = 0; i < fields.length; i++){
-            if(handlers.containsKey(fields[i].getType())) {
-                csvWriter.append(fields[i].getName());
-                System.out.print(fields[i].getName());
-                if (i < fields.length - 1) {
-                    System.out.print(",");
-                    csvWriter.append(DELIMITER);
-                }
+        for(Field field : fields){
+            if(handlers.containsKey(field.getType())){
+                validFields.add(field);
             }
         }
 
-        System.out.print("\n");
+        for(int i = 0; i < validFields.size(); i++){
+            csvWriter.append(validFields.get(i).getName());
+            if (i < validFields.size() - 1) {
+                csvWriter.append(DELIMITER);
+            }
+        }
+
         csvWriter.append("\n");
 
         for(T data : arrayList){
 
-            System.out.println("Size: " + fields.length + "\nArray: " + Arrays.toString(fields));
-            for(int i = 0; i < fields.length; i++){
+            for(int i = 0; i < validFields.size(); i++){
                 System.out.println("START LOOP: " + i);
                 try {
                     System.out.println("Trying to set field accessible");
-                    fields[i].setAccessible(true);
+                    validFields.get(i).setAccessible(true);
                     System.out.println("Trying to set field accessible SUCCESS");
 
                     System.out.println("GETTING HANDLER: " + fields[i].getType().getName());
 
-                    if(handlers.containsKey(fields[i].getType())) {
-                        Handler handle = handlers.get(fields[i].getType()).get(0);
-                        System.out.println("GETTING HANDLER SUCCESS");
+                    Handler handle = handlers.get(validFields.get(i).getType()).get(0);
+                    System.out.println("GETTING HANDLER SUCCESS");
 
-                        System.out.println("GETTING FIELD VALUE");
-                        String fieldVal = handle.handleWrite(data, fields[i]);
-                        System.out.println("GETTING FIELD VALUE SUCCESS");
+                    System.out.println("GETTING FIELD VALUE");
+                    String fieldVal = handle.handleWrite(data, validFields.get(i));
+                    System.out.println("GETTING FIELD VALUE SUCCESS");
 
-                        System.out.println("Appending val: " + fieldVal);
-                        csvWriter.append("\"").append(fieldVal).append("\"");
+                    System.out.println("Appending val: " + fieldVal);
+                    csvWriter.append("\"").append(fieldVal).append("\"");
 
-                        System.out.println("if " + i + " < " + (fields.length - 1));
-                        if (i < fields.length - 1) {
-                            System.out.println("APPENDING DELIMITER");
-                            csvWriter.append(DELIMITER);
-                            System.out.println("APPENDING SUCCESS");
-                        }
+                    System.out.println("if " + i + " < " + (fields.length - 1));
+                    if (i < validFields.size() - 1) {
+                        System.out.println("APPENDING DELIMITER");
+                        csvWriter.append(DELIMITER);
+                        System.out.println("APPENDING SUCCESS");
                     }
+
                 } catch (IllegalAccessException ignored) {
                 }
                 System.out.println("NEXT LOOP: " + i);
