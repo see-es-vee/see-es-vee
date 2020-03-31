@@ -64,13 +64,19 @@ public class CSVWriter<T> {
                     System.out.println("Appending val: " + fieldVal);
                     csvWriter.append("\"").append(fieldVal).append("\"");
 
+                    System.out.println("if(" + i + "< " + (fields.length-1));
                     if(i < fields.length-1){
+                        System.out.println("APPENDING DELIMITER");
                         csvWriter.append(DELIMITER);
+                        System.out.println("APPENDING SUCCESS");
                     }
                 } catch (IllegalAccessException ignored) {
                 }
+                System.out.println("NEXT LOOP");
             }
+            System.out.println("APENDING \"n");
             csvWriter.append("\n");
+            System.out.println("APENDING \"n sccuess");
         }
         System.out.println("Attempting to flush");
         csvWriter.flush();
