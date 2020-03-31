@@ -44,11 +44,12 @@ public class CSVWriter<T> {
         Field[] fields = clazz.getDeclaredFields();
 
         for(int i = 0; i < fields.length; i++){
-
-            csvWriter.append(fields[i].getName());
-            System.out.println("fields[i].getName() " + fields[i].getName());
-            if(i < fields.length-1){
-                csvWriter.append(DELIMITER);
+            if(handlers.containsKey(fields[i].getType())) {
+                csvWriter.append(fields[i].getName());
+                System.out.println("fields[i].getName() " + fields[i].getName());
+                if (i < fields.length - 1) {
+                    csvWriter.append(DELIMITER);
+                }
             }
         }
         csvWriter.append("\n");
