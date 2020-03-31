@@ -72,7 +72,7 @@ public class CSVWriter<T> {
                     System.out.println("Appending val: " + fieldVal);
                     csvWriter.append("\"").append(fieldVal).append("\"");
 
-                    System.out.println("if(" + i + "< " + (fields.length-1));
+                    System.out.println("if " + i + " < " + (fields.length-1));
                     if(i < fields.length-1){
                         System.out.println("APPENDING DELIMITER");
                         csvWriter.append(DELIMITER);
