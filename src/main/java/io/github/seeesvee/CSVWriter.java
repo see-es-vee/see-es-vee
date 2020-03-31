@@ -46,12 +46,15 @@ public class CSVWriter<T> {
         for(int i = 0; i < fields.length; i++){
             if(handlers.containsKey(fields[i].getType())) {
                 csvWriter.append(fields[i].getName());
-                System.out.println("fields[i].getName() " + fields[i].getName());
+                System.out.print(fields[i].getName());
                 if (i < fields.length - 1) {
+                    System.out.print(",");
                     csvWriter.append(DELIMITER);
                 }
             }
         }
+
+        System.out.print("\n");
         csvWriter.append("\n");
 
         for(T data : arrayList){
