@@ -39,10 +39,13 @@ public class CSVWriterTest {
                 .setClass(TestClass.class)
                 .create();
 
+        File file = new File("./writeFileTestOutput.csv");
 
+        assertNotNull(file);
+        assertNotNull(testArray);
         assertNotNull(writer);
 
-        writer.write(new File("./writeFileTestOutput.csv"), testArray);
+        writer.write(file, testArray);
 
 
         MessageDigest md = MessageDigest.getInstance("SHA-256");
