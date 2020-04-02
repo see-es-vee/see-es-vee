@@ -9,12 +9,25 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * CSVParser model.
+
+ * @version 1.0
+ * @param <T> Class of Object to be parsed from.
+ */
 public class CSVWriter<T> {
+
     private final String DELIMITER;
     private final HashMap<Class<?>, ArrayList<Handler>> handlers = new HashMap<>();
     private final Class<T> clazz;
 
-
+    /**
+     * Default constructor for a CSVWriter.
+     *
+     * @param delimiter Delimiter to be used when writing to a CSV File.
+     * @param additionalHandlers Additionally needed handlers for data types.
+     * @param clazz Class of <T> Object being parsed from.
+     */
     CSVWriter(String delimiter, HashMap<Class<?>, ArrayList<Handler>> additionalHandlers, Class<T> clazz){
         this.DELIMITER = delimiter;
         this.clazz = clazz;
@@ -36,6 +49,13 @@ public class CSVWriter<T> {
         }
     }
 
+    /**
+     * Primariy driver for writing &lt;T&gt; Objects to the provided CSV File.
+     *
+     * @param file CSV File to write to.
+     * @param arrayList ArrayList of &lt;T&gt; Objects to parse and write from.
+     * @throws IOException File location not accessible.
+     */
     public void write(File file, ArrayList<T> arrayList) throws IOException {
 
         FileWriter csvWriter = new FileWriter(file);
@@ -83,6 +103,12 @@ public class CSVWriter<T> {
 
     }
 
+    /**
+     * Adds custom Handler objects to be used for parsing.
+     *
+     * @param clazz Class of Object to be handled.
+     * @param handler Handler Object to be added.
+     */
     void addHandler(Class<?> clazz, Handler handler){
 
         if(!handlers.containsKey(clazz)){

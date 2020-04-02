@@ -11,6 +11,12 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * CSVParser model.
+ *
+ * @version 1.0
+ * @param <T> Class of Object to be parsed into.
+ */
 public final class CSVParser<T> {
 
     private final String DELIMITER;
@@ -18,6 +24,13 @@ public final class CSVParser<T> {
     private final HashMap<Class<?>, ArrayList<Handler>> handlers = new HashMap<>();
 
 
+    /**
+     * Default constructor for CSVParser.
+     *
+     * @param delimiter Delimiter to be used for parsing.
+     * @param classOfT Class that will be used to parse into.
+     * @param additionalHandlers ArrayList of additionally added handles by user.
+     */
     CSVParser(String delimiter, Class<T> classOfT, HashMap<Class<?>, ArrayList<Handler>> additionalHandlers){
         this.DELIMITER = delimiter;
         this.clazz = classOfT;
@@ -39,6 +52,17 @@ public final class CSVParser<T> {
         }
     }
 
+    /**
+     * CSVParser driver. This invokes all methods for parsing a CSV file.
+     *
+     * @param file File to parse from.
+     * @return ArrayList of parsed objects based off the given class.
+     * @throws IOException File found / accessible.
+     * @throws InvocationTargetException Attempting to Invoke a null object.
+     * @throws NoSuchMethodException Cannot find constructor for &lt;T&gt;Class.
+     * @throws InstantiationException Failed to create new instance of &lt;T&gt;Object
+     * @throws IllegalAccessException Failed to access class member variable of &lt;T&gt;Object
+     */
     public ArrayList<T> parse(File file) throws IOException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
 
         BufferedReader reader = new BufferedReader(new FileReader(file));
@@ -49,6 +73,13 @@ public final class CSVParser<T> {
 
     }
 
+    /**
+     * Parses the header line of the a given CSV File.
+     *
+     * @param file CSV File to parse.
+     * @return HashMap of &lt;Integer, String&gt; Where Integer is the index of the header value.
+     * @throws IOException CSV File cannot be found / accessed.
+     */
     HashMap<Integer, Field> parseHeader(BufferedReader file) throws IOException {
 
         HashMap<Integer, Field> header = new HashMap<Integer, Field>();
@@ -74,11 +105,23 @@ public final class CSVParser<T> {
         return header;
     }
 
-    ArrayList<T> parseCSV(BufferedReader csv, HashMap<Integer, Field> header) throws IOException, IllegalAccessException, InvocationTargetException, InstantiationException, NoSuchMethodException {
+    /**
+     * Parses all values in a CSV File.
+     *
+     * @param file CSV File to be parsed.
+     * @param header header based off of field / class member variable names in &lt;T&gt;Class
+     * @return ArrayList of &lt;T&gt;Class Objects.
+     * @throws IOException CSV File not found / accessible.
+     * @throws IllegalAccessException Failed to access class member variable of &lt;T&gt;Object
+     * @throws InvocationTargetException Attempting to Invoke a null object.
+     * @throws NoSuchMethodException Cannot find constructor for &lt;T&gt;Class.
+     * @throws InstantiationException Error creating new &lt;T&gt; Object.
+     */
+    ArrayList<T> parseCSV(BufferedReader file, HashMap<Integer, Field> header) throws IOException, IllegalAccessException, InvocationTargetException, NoSuchMethodException, InstantiationException {
 
         ArrayList<T> parsedCSVList = new ArrayList<T>();
 
-        ArrayList<String> parsedLine = parseRow(csv);
+        ArrayList<String> parsedLine = parseRow(file);
 
         while(parsedLine.size() != 0){
 
@@ -89,13 +132,20 @@ public final class CSVParser<T> {
                 handleValue(field, parsedLine.get(i), object);
             }
 
-            parsedLine = parseRow(csv);
+            parsedLine = parseRow(file);
             parsedCSVList.add(object);
         }
 
         return parsedCSVList;
     }
 
+    /**
+     * Parses a single row from provided CSV File.
+     *
+     * @param file CSV File to be parsed.
+     * @return ArrayList of Strings containing parsed strings based off of the delimiter.
+     * @throws IOException CSV file not found / accessible.
+     */
     ArrayList<String> parseRow(BufferedReader file) throws IOException {
 
         ArrayList<String> stringsArray = new ArrayList<String>();
@@ -149,6 +199,12 @@ public final class CSVParser<T> {
         return stringsArray;
     }
 
+    /**
+     * Adds custom Handler objects to be used for parsing.
+     *
+     * @param clazz Class of Object to be handled.
+     * @param handler Handler Object to be added.
+     */
     void addHandler(Class<?> clazz, Handler handler){
 
         if(!handlers.containsKey(clazz)){
@@ -157,6 +213,14 @@ public final class CSVParser<T> {
         handlers.get(clazz).add(handler);
     }
 
+    /**
+     * Calls Handler based off of the &lt;T&gt; Object.&lt;?&gt;ClassMemberVariable.
+     *
+     * @param field field of &lt;T&gt; Object attempting to be parsed from CSV File.
+     * @param value String valued parsed from the CSV File.
+     * @param object new instance of &lt;?&gt; Object that is being added to &lt;T&gt; Object.
+     * @throws NoSuchMethodException Handlers ArrayList does not contain a Handler for &lt;?&gt;field.
+     */
     void handleValue(Field field, String value, T object) throws NoSuchMethodException {
 
         if(!handlers.containsKey(field.getType())) throw new NoSuchMethodException("");
