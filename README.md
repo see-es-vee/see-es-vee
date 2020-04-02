@@ -1,5 +1,4 @@
 # see-es-vee ![Java CI with Maven](https://github.com/see-es-vee/see-es-vee/workflows/Java%20CI%20with%20Maven/badge.svg?branch=master) [![codecov](https://codecov.io/gh/see-es-vee/see-es-vee/branch/master/graph/badge.svg)](https://codecov.io/gh/see-es-vee/see-es-vee) [![javadoc](https://javadoc.io/badge2/io.github.see-es-vee/see-es-vee/javadoc.svg)](https://javadoc.io/doc/io.github.see-es-vee/see-es-vee)
-
 <br />
 <p align="center">
 <img alt="see-es-vee-logo" src="https://raw.githubusercontent.com/see-es-vee/see-es-vee/master/docs/see-es-vee.png">
