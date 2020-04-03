@@ -30,9 +30,6 @@ Maven:
 </dependency>
 ```
 
-[see-es-vee jar downloads](https://maven-badges.herokuapp.com/maven-central/io.github.see-es-vee) are available from Maven Central.
-
-
 ### Documentation
   * [API Javadoc](https://www.javadoc.io/doc/io.github.see-es-vee): Documentation for the current release
 
