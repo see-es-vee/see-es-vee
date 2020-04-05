@@ -111,3 +111,18 @@ public class DateHandler extends Handler {
     }
 }
 ```
+
+#### Using Your Handler(s)
+
+Using a custom made Handler is as simple as calling a method - this is the same in both the Parse Builder, and Write Builder. 
+
+```java
+        // Instantiation of new parse builder of our "Data" class
+        CSVParseBuilder<Data> parsebuilder = new CSVParseBuilder<>();
+
+        // Set the parse builder to use the "Data" class
+        parsebuilder.setClass(Data.class);
+
+        // Add our newly created "DateHandler" from the above example
+        parsebuilder.addHandler(Date.class, new DateHandler());
+```
