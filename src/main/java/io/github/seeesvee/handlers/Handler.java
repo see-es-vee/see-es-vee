@@ -1,6 +1,7 @@
 package io.github.seeesvee.handlers;
 
 import java.lang.reflect.Field;
+import java.text.ParseException;
 
 /**
  * Handler model for handling datatypes.
@@ -15,7 +16,7 @@ public abstract class Handler {
      * @param field field / class member variable within the object to add value to.
      * @throws IllegalAccessException Cannot access the field /class member variable from the given Object.
      */
-    public abstract void handleRead(String value, Object object, Field field) throws IllegalAccessException;
+    public abstract void handleRead(String value, Object object, Field field) throws IllegalAccessException, ParseException;
 
     /**
      * Default method header for taking in a specific datatype and returning its value as a string.

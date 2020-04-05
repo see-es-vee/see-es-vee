@@ -36,3 +36,78 @@ Maven:
 
 ### Coverage 
 ![Code Coverage Graph](https://codecov.io/gh/see-es-vee/see-es-vee/graphs/tree.svg)
+
+### Examples
+
+#### Creating a CSV Reader
+```java
+        // Instantiation of new parse builder of our "Data" class
+        CSVParseBuilder<Data> parsebuilder = new CSVParseBuilder<>();
+
+        // Set the parse builder to use the "Data" class
+        parsebuilder.setClass(Data.class);
+
+        // Create the new parser using the "create()" function on the the parse builder
+        CSVParser<Data> csvParser = parsebuilder.create();
+
+        // return array of "Data" parsed from the .CSV file.
+        ArrayList<Data> datas = csvParser.parse(new File("ExampleInput.csv"));
+```
+
+#### Creating a CSV Writer
+```java
+        /**
+         *  return array of "Data" parsed from the .CSV file.
+         *  see the above example to view how this was done.
+        **/
+        ArrayList<Data> datas = csvParser.parse(new File("test.csv"));
+
+        // Create a new CSVWriteBuilder with our "Data" class
+        CSVWriteBuilder<Data> writeBuilder = new CSVWriteBuilder<>();
+
+        // Set the class to "Data" using the "setClass()" method
+        writeBuilder.setClass(Data.class);
+
+        // Create the new CSVWriter using the ".create()" function on your write builder
+        CSVWriter<Data> writer = writeBuilder.create();
+
+        // Pass in the file name/location that you want to write to, and the ArrayList of "Data" objects to write from.
+        writer.write(new File("ExampleOutput.csv"), datas);
+```
+
+#### Creating a Handler
+
+* In this example we can see that we simply create a new Handler - in this case a "DateHandler" that extends the Handler class and implements the provided abstract methods. 
+
+* "handleRead" takes the given "value" that was parsed from the CSV File, and reads it in expecting it to be a "yyyy-MM-dd" format, once the value is parsed, it then uses the "setSafely()" function to set the new parsed Date in a specific "field" in the given "object".
+
+* "handleWrite" creates a new simple date format with the pattern "yyyy-MM-dd", we then use the "getSafely()" function to get the Date value from the "object" and "field" and returns it as a String. 
+
+* This is just one small but powerful example of how the Handler class can be used, these can be implemented in any which-way that you'd like in order to handle the datatypes of your choice.
+
+```java
+package io.github.seeesvee.handlers;
+
+import java.lang.reflect.Field;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+/**
+ * Date datatype handler.
+ */
+public class DateHandler extends Handler {
+    @Override
+    public void handleRead(String value, Object object, Field field) throws IllegalAccessException, ParseException {
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        Date currentDate = df.parse(value);
+        this.setSafely(value.length() < 1 ? null : currentDate, object, field);
+    }
+
+    @Override
+    public String handleWrite(Object object, Field field) throws IllegalAccessException {
+        String datePattern = "yyyy-MM-dd";
+        SimpleDateFormat sdf = new SimpleDateFormat(datePattern);
+        return sdf.format((Date) getSafely(object, field));
+    }
+}
+```
