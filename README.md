@@ -41,38 +41,38 @@ Maven:
 
 #### Creating a CSV Reader
 ```java
-    // Instantiation of new parse builder of our "Data" class
-    CSVParseBuilder<Data> parsebuilder = new CSVParseBuilder<>();
+// Instantiation of new parse builder of our "Data" class
+CSVParseBuilder<Data> parsebuilder = new CSVParseBuilder<>();
 
-    // Set the parse builder to use the "Data" class
-    parsebuilder.setClass(Data.class);
+// Set the parse builder to use the "Data" class
+parsebuilder.setClass(Data.class);
 
-    // Create the new parser using the "create()" function on the the parse builder
-    CSVParser<Data> csvParser = parsebuilder.create();
+// Create the new parser using the "create()" function on the the parse builder
+CSVParser<Data> csvParser = parsebuilder.create();
 
-    // return array of "Data" parsed from the .CSV file.
-    ArrayList<Data> datas = csvParser.parse(new File("ExampleInput.csv"));
+// return array of "Data" parsed from the .CSV file.
+ArrayList<Data> datas = csvParser.parse(new File("ExampleInput.csv"));
 ```
 
 #### Creating a CSV Writer
 ```java
-    /**
-     *  return array of "Data" parsed from the .CSV file.
-     *  see the above example to view how this was done.
-    **/
-    ArrayList<Data> datas = csvParser.parse(new File("test.csv"));
+/**
+ *  return array of "Data" parsed from the .CSV file.
+ *  see the above example to view how this was done.
+**/
+ArrayList<Data> datas = csvParser.parse(new File("test.csv"));
 
-    // Create a new CSVWriteBuilder with our "Data" class
-    CSVWriteBuilder<Data> writeBuilder = new CSVWriteBuilder<>();
+// Create a new CSVWriteBuilder with our "Data" class
+CSVWriteBuilder<Data> writeBuilder = new CSVWriteBuilder<>();
 
-    // Set the class to "Data" using the "setClass()" method
-    writeBuilder.setClass(Data.class);
+// Set the class to "Data" using the "setClass()" method
+writeBuilder.setClass(Data.class);
 
-    // Create the new CSVWriter using the ".create()" function on your write builder
-    CSVWriter<Data> writer = writeBuilder.create();
+// Create the new CSVWriter using the ".create()" function on your write builder
+CSVWriter<Data> writer = writeBuilder.create();
 
-    // Pass in the file name/location that you want to write to, and the ArrayList of "Data" objects to write from.
-    writer.write(new File("ExampleOutput.csv"), datas);
+// Pass in the file name/location that you want to write to, and the ArrayList of "Data" objects to write from.
+writer.write(new File("ExampleOutput.csv"), datas);
 ```
 
 #### Creating a Handler
@@ -117,12 +117,12 @@ public class DateHandler extends Handler {
 Using a custom made Handler is as simple as calling a method - this is the same in both the Parse Builder, and Write Builder. 
 
 ```java
-    // Instantiation of new parse builder of our "Data" class
-    CSVParseBuilder<Data> parsebuilder = new CSVParseBuilder<>();
+// Instantiation of new parse builder of our "Data" class
+CSVParseBuilder<Data> parsebuilder = new CSVParseBuilder<>();
 
-    // Set the parse builder to use the "Data" class
-    parsebuilder.setClass(Data.class);
+// Set the parse builder to use the "Data" class
+parsebuilder.setClass(Data.class);
 
-    // Add our newly created "DateHandler" from the above example
-    parsebuilder.addHandler(Date.class, new DateHandler());
+// Add our newly created "DateHandler" from the above example
+parsebuilder.addHandler(Date.class, new DateHandler());
 ```
