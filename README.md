@@ -7,7 +7,7 @@
 </div>
 
 
-A high efficiency CSV parsing library for Java 9 and above
+A high efficiency CSV parsing library for Java 8 and above
 
 see-es-vee is a Java library that can be used to convert CSV Files into their Java Object representation. It can also be used to convert a Java Obects to an equivalent CSV file. see-es-vee can work with arbitrary Java objects including pre-existing objects that you do not have source-code of.
 
