@@ -103,6 +103,7 @@
                 <version>3.2.0</version>
                 <configuration>
                     <javadocVersion>1.5</javadocVersion>
+                    <source>8</source>
                 </configuration>
                 <executions>
                     <execution>
