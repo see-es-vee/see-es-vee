@@ -38,7 +38,7 @@ public abstract class Handler {
      */
     protected void setSafely(Object value, Object object, Field field) throws IllegalAccessException {
         boolean needReset = false;
-        if(!field.canAccess(object)) {
+        if(!field.isAccessible()) {
             field.setAccessible(true);
             needReset = true;
         }
@@ -58,7 +58,7 @@ public abstract class Handler {
      */
     protected Object getSafely(Object object, Field field) throws IllegalAccessException {
         boolean needReset = false;
-        if(!field.canAccess(object)) {
+        if(!field.isAccessible()) {
             field.setAccessible(true);
             needReset = true;
         }

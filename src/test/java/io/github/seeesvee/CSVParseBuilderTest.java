@@ -10,10 +10,16 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class CSVParseBuilderTest {
+    static String testCSV;
+    static {
+        ClassLoader cl = ClassLoader.getSystemClassLoader();
+        testCSV = Objects.requireNonNull(cl.getResource("test.csv")).getFile();
+    }
 
     @Test
     void builderShouldSetClass() throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, IOException, NoSuchFieldException {
@@ -24,7 +30,7 @@ public class CSVParseBuilderTest {
         classOfT.setAccessible(true);
         Assertions.assertEquals(TestClass.class, classOfT.get(t));
         classOfT.setAccessible(false);
-        t.parse(new File("dank.csv"));
+        t.parse(new File(testCSV));
     }
 
     @Test
@@ -41,7 +47,7 @@ public class CSVParseBuilderTest {
         Assertions.assertTrue(hands.containsKey(TestClass.class));
         Assertions.assertNull(hands.get(TestClass.class).get(0));
         handlers.setAccessible(false);
-        t.parse(new File("dank.csv"));
+        t.parse(new File(testCSV));
     }
 
     @Test
@@ -54,7 +60,7 @@ public class CSVParseBuilderTest {
         Field DELIMITER = t.getClass().getDeclaredField("DELIMITER");
         DELIMITER.setAccessible(true);
         Assertions.assertEquals(":", DELIMITER.get(t));
-        t.parse(new File("dank.csv"));
+        t.parse(new File(testCSV));
 
     }
 
