@@ -19,6 +19,8 @@ jobs:
       run: echo $GPG_PRIVATE_KEY > private.key
       env:
         GPG_PRIVATE_KEY: ${{ secrets.gpg_private_key }}
+    - name: Test thing
+      run: file private.key
     - name: Import GPG Key
       run: gpg --import --batch private.key
       env:
