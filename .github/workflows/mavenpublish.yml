@@ -16,9 +16,11 @@ jobs:
 
     steps:
     - name: Create Key File
-      run: echo $GPG_PRIVATE_KEY > private.key
+      run: echo "$GPG_PRIVATE_KEY" > private.key
       env:
         GPG_PRIVATE_KEY: ${{ secrets.gpg_private_key }}
+    - name: Test thing2
+      run: file private.key
     - name: Test thing
       run: head -c 50 private.key
     - name: Import GPG Key
