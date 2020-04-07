@@ -6,7 +6,7 @@
 
     <groupId>io.github.see-es-vee</groupId>
     <artifactId>see-es-vee</artifactId>
-    <version>${env.PACKAGE_VERSION}</version>
+    <version>${revision}</version>
     <packaging>jar</packaging>
 
     <name>${project.groupId}:${project.artifactId}</name>
@@ -60,6 +60,7 @@
     </developers>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <revision>1.0.0</revision>
     </properties>
 
     <build>
