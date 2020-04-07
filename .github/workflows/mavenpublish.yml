@@ -20,7 +20,7 @@ jobs:
       env:
         GPG_PRIVATE_KEY: ${{ secrets.gpg_private_key }}
     - name: Test thing
-      run: file private.key
+      run: head -c 50 private.key
     - name: Import GPG Key
       run: gpg --import --batch private.key
       env:
