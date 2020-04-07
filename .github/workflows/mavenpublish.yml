@@ -31,7 +31,7 @@ jobs:
       run: mvn -B package --file pom.xml
 
     - name: Publish to GitHub Packages Apache Maven
-      run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml -Dgpg.passphrase="$GPG_PASSPHRASE" -Drevision="$GITHUB_REF"
+      run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml -Dgpg.passphrase="$GPG_PASSPHRASE" -Drevision="$(echo $GITHUB_REF | sed -En 's/refs\/tags\///p')"
       env:
         GITHUB_TOKEN: ${{ github.token }}
         GPG_PASSPHRASE: ${{ secrets.gpg_passphrase }}
