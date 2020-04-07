@@ -19,14 +19,8 @@ jobs:
       run: echo "$GPG_PRIVATE_KEY" > private.key
       env:
         GPG_PRIVATE_KEY: ${{ secrets.gpg_private_key }}
-    - name: Test thing2
-      run: file private.key
-    - name: Test thing
-      run: head -c 50 private.key
     - name: Import GPG Key
       run: gpg --import --batch private.key
-      env:
-        GPG_PASSPHRASE: ${{ secrets.gpg_passphrase }}
     - uses: actions/checkout@v2
     - name: Set up JDK 1.8
       uses: actions/setup-java@v1
@@ -39,6 +33,7 @@ jobs:
       run: mvn -B package --file pom.xml
 
     - name: Publish to GitHub Packages Apache Maven
-      run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
+      run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml -Dgpg.passphrase="$GPG_PASSPHRASE"
       env:
         GITHUB_TOKEN: ${{ github.token }}
+        GPG_PASSPHRASE: ${{ secrets.gpg_passphrase }}
