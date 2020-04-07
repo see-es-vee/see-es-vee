@@ -6,7 +6,7 @@
 
     <groupId>io.github.see-es-vee</groupId>
     <artifactId>see-es-vee</artifactId>
-    <version>1.0.0</version>
+    <version>${env.PACKAGE_VERSION}</version>
     <packaging>jar</packaging>
 
     <name>${project.groupId}:${project.artifactId}</name>
