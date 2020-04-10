@@ -4,6 +4,8 @@ import io.github.seeesvee.handlers.Handler;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Class model for a CSVWriterBuilder
@@ -12,9 +14,8 @@ import java.util.HashMap;
  * @param <T> Class of Object that will be written to a CSV File.
  */
 public final class CSVWriteBuilder<T> {
-
     private String delimiter = ",";
-    private HashMap<Class<?>, ArrayList<Handler>> handlers = new HashMap<>();
+    private Map<Class<?>, List<Handler>> handlers = new HashMap<>();
     private Class<T> clazz;
 
     /**
@@ -28,7 +29,6 @@ public final class CSVWriteBuilder<T> {
      * @return CSVWriter&lt;T&gt; Returns a CSVWriter with the specified class.
      */
     public CSVWriter<T> create(){
-
         if(this.handlers.size() == 0) handlers = null;
         if(this.clazz == null) throw new NullPointerException("Class must be set");
         return new CSVWriter<T>(delimiter, handlers, clazz);

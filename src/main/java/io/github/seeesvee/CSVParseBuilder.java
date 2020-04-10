@@ -4,6 +4,8 @@ import io.github.seeesvee.handlers.Handler;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * CSVParseBuilder Model
@@ -14,7 +16,7 @@ import java.util.HashMap;
 public final class CSVParseBuilder<T> {
 
     private String delimiter = ",";
-    private HashMap<Class<?>, ArrayList<Handler>> handlers = new HashMap<>();
+    private Map<Class<?>, List<Handler>> handlers = new HashMap<>();
     private Class<T> clazz;
 
     /**
@@ -28,7 +30,6 @@ public final class CSVParseBuilder<T> {
      * @return CSVParser&lt;T&gt; Returns a CSVParser with the specified class.
      */
     public CSVParser<T> create(){
-
         if(this.handlers.size() == 0) handlers = null;
         if(this.clazz == null) throw new NullPointerException("Class must be set");
         return new CSVParser<T>(this.delimiter, this.clazz, this.handlers);
