@@ -74,7 +74,7 @@ public final class CSVParser<T> {
      * @return HashMap of &lt;Integer, String&gt; Where Integer is the index of the header value.
      * @throws IOException CSV File cannot be found / accessed.
      */
-    Map<Integer, Field> parseHeader(BufferedReader file) throws IOException {
+    protected Map<Integer, Field> parseHeader(BufferedReader file) throws IOException {
         Map<Integer, Field> header = new HashMap<>();
         List<String> headerList = parseRow(file);
 
@@ -108,7 +108,7 @@ public final class CSVParser<T> {
      * @throws NoSuchMethodException     Cannot find constructor for &lt;T&gt;Class.
      * @throws InstantiationException    Error creating new &lt;T&gt; Object.
      */
-    List<T> parseCSV(BufferedReader file, Map<Integer, Field> header) throws IOException, IllegalAccessException, InvocationTargetException, NoSuchMethodException, InstantiationException {
+    protected List<T> parseCSV(BufferedReader file, Map<Integer, Field> header) throws IOException, IllegalAccessException, InvocationTargetException, NoSuchMethodException, InstantiationException {
         List<T> parsedCSVList = new ArrayList<>();
         List<String> parsedLine = parseRow(file);
 
@@ -133,7 +133,7 @@ public final class CSVParser<T> {
      * @return ArrayList of Strings containing parsed strings based off of the delimiter.
      * @throws IOException CSV file not found / accessible.
      */
-    List<String> parseRow(BufferedReader file) throws IOException {
+    protected List<String> parseRow(BufferedReader file) throws IOException {
         List<String> stringsArray = new ArrayList<>();
         StringBuilder string = new StringBuilder();
 
