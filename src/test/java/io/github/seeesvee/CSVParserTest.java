@@ -5,9 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.io.*;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Objects;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -27,7 +25,7 @@ public class CSVParserTest {
         String test = "test,\"\",\",hello\nworld\",\",,\",,hi";
         Reader inputString = new StringReader(test);
         BufferedReader reader = new BufferedReader(inputString);
-        ArrayList<String> parsed = parser.parseRow(reader);
+        List<String> parsed = parser.parseRow(reader);
 
         assertArrayEquals(new String[]{"test", "\"\"", "\",hello\nworld\"", "\",,\"", "", "hi"}, parsed.toArray(new String[0]));
     }
@@ -40,7 +38,7 @@ public class CSVParserTest {
         Reader inputString = new StringReader(test);
         BufferedReader reader = new BufferedReader(inputString);
 
-        HashMap<Integer, Field> testHeader = parser.parseHeader(reader);
+        Map<Integer, Field> testHeader = parser.parseHeader(reader);
 
         assertEquals(5, testHeader.keySet().size());
     }
@@ -49,7 +47,7 @@ public class CSVParserTest {
     void parseCSVTest() throws IOException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException {
 
         CSVParser<TestClass> parser = new CSVParser<>(",", TestClass.class, null);
-        ArrayList<TestClass> testParse = parser.parse(new File(testCSV));
+        List<TestClass> testParse = parser.parse(new File(testCSV));
 
         assertEquals(2, testParse.size());
 

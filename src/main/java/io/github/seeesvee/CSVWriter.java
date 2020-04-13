@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * CSVParser model.
@@ -18,7 +20,7 @@ import java.util.HashMap;
 public class CSVWriter<T> {
 
     private final String DELIMITER;
-    private final HashMap<Class<?>, ArrayList<Handler>> handlers = new HashMap<>();
+    private final Map<Class<?>, List<Handler>> handlers = new HashMap<>();
     private final Class<T> clazz;
 
     /**
@@ -28,7 +30,7 @@ public class CSVWriter<T> {
      * @param additionalHandlers Additionally needed handlers for data types.
      * @param clazz Class of <T> Object being parsed from.
      */
-    CSVWriter(String delimiter, HashMap<Class<?>, ArrayList<Handler>> additionalHandlers, Class<T> clazz){
+    CSVWriter(String delimiter, Map<Class<?>, List<Handler>> additionalHandlers, Class<T> clazz){
         this.DELIMITER = delimiter;
         this.clazz = clazz;
 
@@ -43,9 +45,7 @@ public class CSVWriter<T> {
         addHandler(Integer.class, new IntegerHandler());
 
         if(additionalHandlers != null){
-            additionalHandlers.forEach((k,v) -> {
-                v.forEach((v2 -> this.addHandler(k,v2)));
-            });
+            additionalHandlers.forEach((k,v) -> v.forEach((v2 -> this.addHandler(k,v2))));
         }
     }
 
@@ -56,11 +56,10 @@ public class CSVWriter<T> {
      * @param arrayList ArrayList of &lt;T&gt; Objects to parse and write from.
      * @throws IOException File location not accessible.
      */
-    public void write(File file, ArrayList<T> arrayList) throws IOException {
-
+    public void write(File file, List<T> arrayList) throws IOException {
         FileWriter csvWriter = new FileWriter(file);
         Field[] fields = clazz.getDeclaredFields();
-        ArrayList<Field> validFields = new ArrayList<>();
+        List<Field> validFields = new ArrayList<>();
 
         for(Field field : fields){
             if(handlers.containsKey(field.getType())){
@@ -97,10 +96,8 @@ public class CSVWriter<T> {
             }
             csvWriter.append("\n");
         }
-
         csvWriter.flush();
         csvWriter.close();
-
     }
 
     /**
